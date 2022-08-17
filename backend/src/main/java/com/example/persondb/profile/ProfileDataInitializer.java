@@ -21,10 +21,22 @@ public class ProfileDataInitializer implements ApplicationRunner {
         Profile profile = Profile.builder()
                 .korName("장원영")
                 .engName("Jang Wonyoung")
+                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_1809_190x190.jpg")
                 .birthday("2004-08-31")
                 .category("가수")
                 .enneagram("3w2")
                 .mbti("ESFP")
+                .build();
+        profileRepository.save(profile);
+
+        profile = Profile.builder()
+                .korName("박은빈")
+                .engName("Park Eunbin")
+                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_1190_190x190.png")
+                .birthday("1992-09-04")
+                .category("배우")
+                .enneagram("9w1")
+                .mbti("INFP")
                 .build();
         profileRepository.save(profile);
     }

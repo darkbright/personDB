@@ -20,16 +20,18 @@ public class Profile {
     private String korName;
     private String engName;
     private String category;
+    private String imageUrl;
 
     private String enneagram;
     private String mbti;
     private String birthday;
 
     @Builder
-    public Profile(String korName, String engName, String category, String enneagram, String mbti, String birthday) {
+    public Profile(String korName, String engName, String category, String imageUrl, String enneagram, String mbti, String birthday) {
         this.korName = korName;
         this.engName = engName;
         this.category = category;
+        this.imageUrl = imageUrl;
         this.enneagram = enneagram;
         this.mbti = mbti;
         this.birthday = birthday;
