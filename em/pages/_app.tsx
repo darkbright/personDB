@@ -3,8 +3,14 @@ import 'antd/dist/antd.css'
 import '../styles/vars.css'
 import '../styles/global.css'
 
+import Layout from '../components/layout'
+
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Layout {...pageProps}>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
 
 export default MyApp
