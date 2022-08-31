@@ -1,7 +1,8 @@
  import { ToolOutlined, UserSwitchOutlined, AuditOutlined, AlertOutlined, SettingOutlined } from '@ant-design/icons';
  import { Breadcrumb, Layout, Menu, Typography} from 'antd';
  import React from 'react';
-
+ import Router from 'next/router';
+ 
  const { Header, Content, Sider } = Layout;
  const { Text } = Typography;
  const items2 = [ AuditOutlined, UserSwitchOutlined, ToolOutlined, SettingOutlined ].map((icon, index) => {
@@ -21,48 +22,48 @@
  });
  const itemsSide = [
    {
-     key: "sub1",
+     key: "equipment",
      icon: React.createElement(ToolOutlined),
      label: '장비관리',
      children: [
-       {key: '01', label: '장비관리'},
-       {key: '02', label: '단말기관리'},
-       {key: '03', label: 'QR코드관리'},
+       {key: 'equipment', label: '장비관리'},
+       {key: 'terminal', label: '단말기관리'},
+       {key: 'qrcode', label: 'QR코드관리'},
      ]
    },
    {
-     key: "sub2",
+     key: "user",
      icon: React.createElement(UserSwitchOutlined),
      label: '사용자관리',
      children: [
-       {key: '11', label: '관리자'},
-       {key: '12', label: '사용자관리'},
-       {key: '13', label: '권한관리'},
+       {key: 'admin', label: '관리자'},
+       {key: 'user', label: '사용자관리'},
+       {key: 'authority', label: '권한관리'},
      ]
    },
    {
-    key: "sub3",
+    key: "organization",
     icon: React.createElement(AuditOutlined),
     label: '기관 / 제작업체관리',
     children: [
-      {key: '21', label: '기관'},
-      {key: '22', label: '제작업체관리'},
+      {key: 'organization', label: '기관'},
+      {key: 'vendor', label: '제작업체관리'},
     ]
   },
   {
-    key: "sub4",
+    key: "accident",
     icon: React.createElement(AlertOutlined),
     label: '사고관리',
     children: [
-      {key: '31', label: '사고관리'},
+      {key: 'accident', label: '사고관리'},
     ]
   },
   {
-    key: "sub5",
+    key: "system",
     icon: React.createElement(SettingOutlined),
     label: '시스템관리',
     children: [
-      {key: '41', label: '시스템관리'},
+      {key: 'system', label: '시스템관리'},
     ]
   },
  ]
@@ -85,6 +86,10 @@
              borderRight: 0,
            }}
            items={itemsSide}
+           onClick={({keyPath})=>{
+            const pathname = '/' + keyPath[1] + '/' + keyPath[0];
+            Router.push({pathname})
+          }}
         />
        </Sider>
        <Layout

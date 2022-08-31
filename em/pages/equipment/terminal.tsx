@@ -134,7 +134,7 @@ const App: React.FC = () => {
 
   const defaultColumns: (ColumnTypes[number] & { editable?: boolean; dataIndex: string })[] = [
     {
-      title: 'name',
+      title: '단말기명',
       dataIndex: 'name',
       width: '30%',
       editable: true,
