@@ -1,4 +1,5 @@
 import Card from '../components/Card'
+import { Space } from 'antd'
 
 const App = () => {
   const cards = [
@@ -19,14 +20,14 @@ const App = () => {
     },  
   ];
   
-  
   return (
     <>
-      <div>
-        <Card { ...cards[0] } />
-        <Card { ...cards[1] } />
-        <Card { ...cards[2] } />
-      </div>
+      <Space wrap size='middle'>
+        {cards.map((card) => 
+            <Card { ...card} />
+        )}
+      </Space>
+
     </>
   )
 };
