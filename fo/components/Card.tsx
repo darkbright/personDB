@@ -3,15 +3,15 @@ import React from 'react';
 const { Meta } = Card;
 
 
-const App = ( xxx: {title : string; description: string; url: string} ) => (
+const App = ( xxx: {korName : string; category: string; imageUrl: string} ) => (
   <Card
     hoverable
     style={{
       width: 240,
     }}
-    cover={<img alt="example" src={xxx.url} />}
+    cover={<img alt="example" src={xxx.imageUrl} />}
   >
-    <Meta title={xxx.title} description={xxx.description} />
+    <Meta title={xxx.korName} description={xxx.category} />
   </Card>
 );
 
