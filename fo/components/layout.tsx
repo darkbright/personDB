@@ -4,6 +4,7 @@
  */
 
 import Router from 'next/router';
+import { useEffect, useState } from "react";
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React from 'react';
@@ -16,40 +17,55 @@ const items1 = ['1', '2', '3'].map((key) => ({
 
 const itemsSide = [
   {
-    key: "sub1",
+    key: "main",
     icon: React.createElement(UserOutlined),
-    label: 'Hot',
+    label: '메인',
     children: [
-      {key: '01', label: '신규등록'},
-      {key: '02', label: '최근뜨는'},
-      {key: '03', label: '인기있는'},
-      {key: '04', label: '논란중인'},
+      {key: 'new', label: '신규등록'},
+      {key: 'latest', label: '최근뜨는'},
+      {key: 'popular', label: '인기있는'},
+      {key: 'controversial', label: '논란중인'},
     ]
   },
   {
-    key: "sub2",
+    key: "category",
     icon: React.createElement(LaptopOutlined),
     label: '카테고리',
     children: [
-      {key: '11', label: '가수'},
-      {key: '12', label: '배우'},
-      {key: '13', label: '방송인'},
-      {key: '14', label: '희극인'},
-      {key: '15', label: '예술인'},
-      {key: '16', label: '스포츠선수'},
-      {key: '17', label: '인플루언서'},
-      {key: '18', label: '기업가'},
-      {key: '19', label: '정치인'},
-      {key: '20', label: '종교인'},
-      {key: '21', label: '학자'},
-      {key: '22', label: '역사인물'},
+      {key: 'singer', label: '가수'},
+      {key: 'actor', label: '배우'},
+      {key: 'broadcaster', label: '방송인'},
+      {key: 'comedian', label: '희극인'},
+      {key: 'artist', label: '예술인'},
+      {key: 'sports', label: '스포츠선수'},
+      {key: 'influencer', label: '인플루언서'},
+      {key: 'entrepreneur', label: '기업가'},
+      {key: 'politician', label: '정치인'},
+      {key: 'religius', label: '종교인'},
+      {key: 'scholar', label: '학자'},
+      {key: 'historical', label: '역사인물'},
       {key: '23', label: '해외인물'},
       {key: '24', label: '캐릭터'},
     ]
   },
 ]
 
-const App = ( {children} ) => (
+const menuDefault = {
+  depth1: "Menu1",
+  depth2: "Menu2"
+}
+
+const App = ( {children} ) => {
+  const [menus, setMenus] = useState(menuDefault);
+  useEffect(() => {
+    const menu = {
+      depth1: "Hot",
+      depth2: "신규등록"
+    };
+    setMenus(menu);
+  }, []);
+
+  return (
   <Layout>
     <Header className="header">
       <div className="logo" />
@@ -60,15 +76,19 @@ const App = ( {children} ) => (
         <Menu
           mode="inline"
           defaultSelectedKeys={[]}
-          defaultOpenKeys={['sub1']}
+          defaultOpenKeys={['main']}
           style={{
             height: '100%',
             borderRight: 0,
           }}
           items={itemsSide}
-          onClick={({keyPath})=> {
-            console.log(keyPath);
-            Router.push("/list");
+          onClick={(p)=> {
+            console.log(p);
+            if (p.keyPath[1] === "category") {
+              Router.push(`/category/${p.keyPath[0]}`);
+            } else {
+              Router.push(`/list`);
+            }
           }}
         />
       </Sider>
@@ -83,8 +103,8 @@ const App = ( {children} ) => (
           }}
         >
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
+          <Breadcrumb.Item>{menus.depth1}</Breadcrumb.Item>
+          <Breadcrumb.Item>{menus.depth2}</Breadcrumb.Item>
         </Breadcrumb>
         <Content
           className="site-layout-background"
@@ -99,6 +119,7 @@ const App = ( {children} ) => (
       </Layout>
     </Layout>
   </Layout>
-);
+  )
+};
 
 export default App;
