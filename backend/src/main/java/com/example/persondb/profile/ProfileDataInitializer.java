@@ -39,5 +39,27 @@ public class ProfileDataInitializer implements ApplicationRunner {
                 .mbti("INFP")
                 .build();
         profileRepository.save(profile);
+
+        profile = Profile.builder()
+                .korName("유나")
+                .engName("YUNA")
+                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_216_190x190.png")
+                .birthday("2003-12-09")
+                .category("가수")
+                .enneagram("7w6")
+                .mbti("ENFJ")
+                .build();
+        profileRepository.save(profile);
+
+        profile = Profile.builder()
+                .korName("손석구")
+                .engName("Park Eunbin")
+                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_216_190x190.png")
+                .birthday("1983-02-07")
+                .category("배우")
+                .enneagram("8w9")
+                .mbti("ISFP")
+                .build();
+        profileRepository.save(profile);
     }
 }
