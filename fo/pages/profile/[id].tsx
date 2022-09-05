@@ -1,10 +1,35 @@
-
-import { useRouter } from 'next/router'
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 import { Image, Space, Button } from 'antd';
+
+const profileDefault = {
+  "id":1,
+  "korName":"유나",
+  "engName":"Jang Wonyoung",
+  "category":"가수",
+  "imageUrl":"",
+  "enneagram":"3w2",
+  "mbti":"",
+  "birthday":"2004-08-31"
+}
 
 const Profile = () => {
   const router = useRouter();
-  const { id, korName ,engName, imageUrl,category,birthday,mbti,enneagram } = router.query;
+  const { query = {} } = router || {};
+  const { id = 0 } = query || {};
+
+  const [profile, setProfile] = useState(profileDefault);
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        console.log(`id = ${id}`);
+        const response = await fetch(`/api/profile/${id}`);
+        const json = await response.json();
+        setProfile(json);
+        console.log(json);
+      })();
+    }
+  }, [id]);
   
   return (
     <>
@@ -14,17 +39,17 @@ const Profile = () => {
               <div className="profile-img">
                 <Image
                   style={{borderRadius: '50%'}}
-                  src={"https://www.me-u.co.kr/data/profile/thumb-profile_216_190x190.png"}
+                  src={profile.imageUrl}
                 />
               </div>
               <div className="profile-txt" style={{ alignItems: 'center', justifyContent: 'center' ,listStyle: 'none'}}>
                 <h3>💜{id}</h3>
-                <span className="mr-2">U-na{engName}</span>
+                <span className="mr-2">U-na{profile.engName}</span>
                 <span className='group'>ITZY</span>
                 <ul className='category' style={{listStyle: 'none', marginTop: '10px', fontWeight: 'bold'}}>
-                  <li>연예인{category}</li>
+                  <li>연예인{profile.category}</li>
                   <li>가수</li>
-                  <li>생일{birthday}</li>
+                  <li>생일{profile.birthday}</li>
                 </ul>
               </div>
             </div>
@@ -39,12 +64,11 @@ const Profile = () => {
         <div className="right">
           <Image 
             style={{borderRadius: '50%', width:'130px', height:'120px'}}
-            src={"https://img.favpng.com/14/23/8/the-enneagram-enneagram-of-personality-personality-type-enneagram-3-paths-to-wholeness-png-favpng-cwnAWYKL7xmhrZeGR17Deaeii.jpg"}
+            src={profile.imageUrl}
           />
         </div>
      </Space>
-    </>
-    
+     </>
   )
 };
 
