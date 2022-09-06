@@ -87,7 +87,7 @@ const App = ( {children} ) => {
             if (p.keyPath[1] === "category") {
               Router.push(`/category/${p.keyPath[0]}`);
             } else {
-              Router.push(`/list`);
+              Router.push(`/profile/${p.keyPath[0]}`);
             }
           }}
         />
