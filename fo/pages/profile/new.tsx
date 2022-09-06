@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { Button, Form, Input, DatePicker, Space, Select } from 'antd';
 import type { DatePickerProps } from 'antd';
 import React from 'react';
@@ -16,8 +17,18 @@ const onChange: DatePickerProps['onChange'] = (date, dateString) => {
 
 
 const New = (props: any) => {
-  const onFinish = (values: any) => {
-    console.log(values.user);
+  const onFinish = async (values: any) => {
+    const requestOption = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values.user)
+    };
+
+    const result = await (await fetch("/api/profile", requestOption)).json();
+
+    if (result.id) {
+      Router.push(`/profile/${result.id}`);
+    }
   };
 
   return (
