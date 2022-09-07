@@ -3,6 +3,7 @@ import { Button, Form, Input, DatePicker, Space, Select } from 'antd';
 import type { DatePickerProps } from 'antd';
 import React from 'react';
 
+
 // info form
 const layout = {
   labelCol: { span: 8 },
@@ -41,7 +42,7 @@ const New = (props: any) => {
       >
 
         {/* Name input */}
-        <Form.Item name={['user', 'name']} label="Name" rules={[{ type: 'string' }]}>
+        <Form.Item name={['user', 'korName']} label="Name" rules={[{ type: 'string' }]}>
           <Input />
         </Form.Item>
 
@@ -50,8 +51,8 @@ const New = (props: any) => {
           <Input />
         </Form.Item>
 
-        {/* Occupation input */}
-        <Form.Item name={['user', 'occupation']} label="Occupation" rules={[{ type: 'string' }]}>
+        {/* Category input */}
+        <Form.Item name={['user', 'category']} label="Occupation" rules={[{ type: 'string' }]}>
           <Input />
         </Form.Item>
 
