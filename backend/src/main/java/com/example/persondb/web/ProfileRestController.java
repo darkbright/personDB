@@ -51,4 +51,15 @@ public class ProfileRestController {
         return new ResponseEntity<>(profile, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "인물정보 삭제 API", notes = "인물정보를 삭제한다.")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Profile> delete(@PathVariable("id") Long id) {
+        Profile profile = new Profile();
+        profile.setId(id);
+
+        profileService.delete(profile);
+
+        return new ResponseEntity<>(profile, HttpStatus.OK);
+    }
+
 }

@@ -18,6 +18,7 @@ public class ProfileDataInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+/*        
         Profile profile = Profile.builder()
                 .korName("장원영")
                 .engName("Jang Wonyoung")
@@ -54,12 +55,13 @@ public class ProfileDataInitializer implements ApplicationRunner {
         profile = Profile.builder()
                 .korName("손석구")
                 .engName("Park Eunbin")
-                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_216_190x190.png")
+                .imageUrl("https://www.me-u.co.kr/data/profile/thumb-profile_3875_190x190.jpg")
                 .birthday("1983-02-07")
                 .category("배우")
                 .enneagram("8w9")
                 .mbti("ISFP")
                 .build();
         profileRepository.save(profile);
+*/        
     }
 }
