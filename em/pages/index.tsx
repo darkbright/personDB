@@ -1,89 +1,147 @@
-import {
-  Button,
-  DatePicker,
-  Form,
-  InputNumber,
-  Select,
-  Slider,
-  Switch,
-} from 'antd'
-import type { DatePickerProps } from 'antd'
-import { SmileFilled } from '@ant-design/icons'
-import Link from 'next/link'
+import { Space, Table, Tag, Input, Select, Divider, Col, Row, Card, Progress } from 'antd';
+import React from 'react';
+const columns = [
+  {
+    title: '번호',
+    dataIndex: 'number',
+    key: 'number',
+  },
+  {
+    title: '장비일련번호',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text) => <a>{text}</a>,
+  },
+  {
+    title: '장비명',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: '승인상태',
+    key: 'tags',
+    dataIndex: 'tags',
+    render: (_, { tags }) => (
+      <>
+        {tags.map((tag) => {
+          let color = tag.length > 3 ? 'geekblue' : 'green';
 
-const FormItem = Form.Item
-const Option = Select.Option
+          if (tag === '승인') {
+            color = 'green';
+          }
 
-const content = {
-  marginTop: '100px',
-}
+          if (tag === '미승인') {
+            color = 'geekblue';
+          }
 
-export default function Home() {
-  const onDatePickerChange: DatePickerProps['onChange'] = (
-    date,
-    dateString
-  ) => {
-    console.log(date, dateString)
-  }
+          if (tag === '승인요청') {
+            color = 'volcano';
+          }
 
-  return (
-    <div style={content}>
-      <div className="text-center mb-5">
-        <Link href="#">
-          <a className="logo mr-0">
-            <SmileFilled style={{ fontSize: 48 }} />
-          </a>
-        </Link>
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: '수리상태',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: '수발상태',
+    key: 'action',
+    dataIndex: 'action',
+  },
+  {
+    title: '증명서',
+    dataIndex: 'cert',
+    key: 'cert',
+  },  
+];
+const data = [
+  {
+    key: '1',
+    number: 1,
+    name: 'NEU-14-0001',
+    age: 'OO장비 A',
+    address: '양호',
+    tags: ['승인'],
+    action: 'O',
+    cert: 'O',
+  },
+  {
+    key: '2',
+    number: 2,
+    name: 'NEU-14-0002',
+    age: 'OO장비 B',
+    address: '양호',
+    tags: ['승인요청'],
+    action: 'O',
+    cert: 'O',
+  },
+  {
+    key: '3',
+    number: 3,
+    name: 'NEU-14-0003',
+    age: 'OO장비 C',
+    address: '양호',
+    tags: ['미승인'],
+    action: 'O',
+    cert: 'O',
+  },
+];
 
-        <p className="mb-0 mt-3 text-disabled">Welcome to the world !</p>
-      </div>
-      <div>
-        <Form
-          layout="horizontal"
-          size={'large'}
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 8 }}
-        >
-          <FormItem label="Input Number">
-            <InputNumber
-              min={1}
-              max={10}
-              style={{ width: 100 }}
-              defaultValue={3}
-              name="inputNumber"
-            />
-          </FormItem>
+const { Option } = Select;
 
-          <FormItem label="Switch">
-            <Switch defaultChecked />
-          </FormItem>
+const style: React.CSSProperties = { outlineStyle: 'solid', outlineWidth: 0, padding: '2px 0' };
 
-          <FormItem label="Slider">
-            <Slider defaultValue={70} />
-          </FormItem>
+const App = () => (
+  <>
+    <Card title="Dashboard">
+      <Space wrap size='middle'>      
+        <Card title="부서별 보유대수" style={{ width: 200 }}>
+          <Progress percent={30} />
+          <Progress percent={50} status="active" />
+          <Progress percent={70} status="exception" />
+          <Progress percent={100} />
+          <Progress percent={50} showInfo={false} />
+        </Card>
+        <Card title="수리상태 현황" style={{ width: 200 }}>
+          <Progress strokeColor={{'0%': '#108ee9','100%': '#87d068',}} type="circle" percent={75} />
+        </Card>
+        <Card title="승인상태 현황" style={{ width: 200 }}>
+          <Progress strokeColor={{'0%': '#108ee9','100%': '#87d068',}} type="circle" percent={63} />
+        </Card>
+        <Card title="사용 현황" style={{ width: 200 }}>
+          <Progress strokeColor={{'0%': '#108ee9','100%': '#87d068',}} type="circle" percent={73.2} />
+        </Card>
+        <Card title="제작 현황" style={{ width: 200 }}>
+          <Progress strokeColor={{'0%': '#108ee9','100%': '#87d068',}} type="circle" percent={58.2} />
+        </Card>
+        <Card title="파기 현황" style={{ width: 200 }}>
+          <Progress strokeColor={{'0%': '#108ee9','100%': '#87d068',}} type="circle" percent={54.2} />
+        </Card>
+      </Space>
+    </Card>  
+    <br/>
+    <Row>
+      <Col span={24}></Col>
+    </Row>  
+    <Input.Group compact style={style}>
+      <Select defaultValue="일련번호">
+        <Option value="일련번호">일련번호</Option>
+        <Option value="승인상태">승인상태</Option>
+      </Select>      
+      <Input.Search allowClear style={{ width: '20%' }} defaultValue="" />
+    </Input.Group>
+    <br/>
+    <Table columns={columns} dataSource={data} />
+  </>
+);
 
-          <FormItem label="Select">
-            <Select defaultValue="lucy" style={{ width: 192 }}>
-              <Option value="jack">jack</Option>
-              <Option value="lucy">lucy</Option>
-              <Option value="disabled" disabled>
-                disabled
-              </Option>
-              <Option value="yiminghe">yiminghe</Option>
-            </Select>
-          </FormItem>
-
-          <FormItem label="DatePicker">
-            <DatePicker showTime onChange={onDatePickerChange} />
-          </FormItem>
-          <FormItem style={{ marginTop: 48 }} wrapperCol={{ offset: 8 }}>
-            <Button type="primary" htmlType="submit">
-              OK
-            </Button>
-            <Button style={{ marginLeft: 8 }}>Cancel</Button>
-          </FormItem>
-        </Form>
-      </div>
-    </div>
-  )
-}
+export default App;
