@@ -41,7 +41,7 @@ const itemsSide = [
       {key: 'influencer', label: '인플루언서'},
       {key: 'entrepreneur', label: '기업가'},
       {key: 'politician', label: '정치인'},
-      {key: 'religius', label: '종교인'},
+      {key: 'religious', label: '종교인'},
       {key: 'scholar', label: '학자'},
       {key: 'historical', label: '역사인물'},
       {key: '23', label: '해외인물'},
