@@ -1,4 +1,4 @@
- import {PieChartOutlined, ToolOutlined,CloudServerOutlined, UserSwitchOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
+ import {PieChartOutlined, ToolOutlined,CloudServerOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
  import { Breadcrumb, Layout, Menu, Typography} from 'antd';
  import React from 'react';
  import Router from 'next/router';
@@ -26,8 +26,8 @@
        {key: 'security',    label: '보안사고정보관리'},
     ]
   },
-   {
-    key: "security",
+  {
+    key: "documents",
     icon: React.createElement(ControlOutlined),
     label: '암호자재 관리',
     children: [
@@ -85,12 +85,12 @@
     children: [{key: 'organization', label: '유관기관 관리'},]
   },  
   {
-    key: "accident",
+    key: "system",
     icon: React.createElement(SettingOutlined),
     label: '시스템 관리',
     children: [
       {
-        key: 'system',   
+        key: 'admin',   
         label: '사용자 관리',
         children:[
           {key: 'manager', label: '관리자 관리'},
@@ -102,7 +102,7 @@
         label: '단말기 관리',
         children:[
           {key: 'qr', label: 'QR코드 정보'},
-          {key: 'workplace', label: '단말기 관리'},
+          {key: 'object', label: '단말기 관리'},
         ]
       },
         
@@ -117,13 +117,11 @@
  
  const App = ( {children} ) => (
    <Layout>
-     <Header className="header">
-       {/* <div className="logo" /> */}
+     <Header className="header">   
        <Link href="/"><a><Text strong style={ {fontSize: '20px', color: 'white'} }>OO장비 관리 시스템</Text></a></Link>
-       {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} items={items1} /> */}
      </Header>
      <Layout>
-       <Sider width={200} className="site-layout-background">
+       <Sider width={240} className="site-layout-background">
          <Menu
            mode="inline"
            defaultSelectedKeys={['01']}
@@ -134,7 +132,7 @@
            }}
            items={itemsSide}
            onClick={({keyPath})=>{
-            const pathname = '/' + keyPath[1] + '/' + keyPath[0];
+            const pathname = '/' + keyPath[2] + '/' + keyPath[1] + '/' + keyPath[0] 
             Router.push({pathname})
           }}
         />
