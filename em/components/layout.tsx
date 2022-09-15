@@ -1,14 +1,13 @@
- import {PieChartOutlined, ToolOutlined,CloudServerOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
+ import { ToolOutlined,CloudServerOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
  import { Breadcrumb, Layout, Menu, Typography} from 'antd';
  import React from 'react';
- import Router from 'next/router';
+ import Router, { useRouter } from 'next/router';
  import Link from 'next/link';
  
  const { Header, Content, Sider } = Layout;
  const { Text } = Typography;
 
  const itemsSide = [
-
   {
      key: "equipments",
      icon: React.createElement(CloudServerOutlined),
@@ -115,7 +114,30 @@
   },
  ]
  
- const App = ( {children} ) => (
+ const App = ( {children} ) => {
+
+  // Breadcrumb 구현을 위해 URL에 따른 메뉴 데이터 구하기
+  const router = useRouter();
+  const paths = router.pathname.split('/');
+
+  // 1 Depth 메뉴 정보
+  const menu1 = itemsSide.find((element) => element.key === paths[1]);
+  let menu2 = menu1;
+
+  // 2 Depth 메뉴 정보
+  if (menu1?.children)
+    menu2 = menu1.children.find((element) => element.key === paths[2]);
+  else 
+    menu2 = {};
+
+  // 3 Depth 메뉴 정보
+  let menu3 = menu2;
+  if (menu2?.children)
+    menu3 = menu2.children.find((element) => element.key === paths[3]);
+  else 
+    menu3 = {};
+
+  return (
    <Layout>
      <Header className="header">   
        <Link href="/"><a><Text strong style={ {fontSize: '20px', color: 'white'} }>OO장비 관리 시스템</Text></a></Link>
@@ -149,8 +171,10 @@
              margin: '16px 0',
            }}
          >
-           <Breadcrumb.Item href="..">장비관리</Breadcrumb.Item>
-           <Breadcrumb.Item href="./table">Table</Breadcrumb.Item>
+           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+           <Breadcrumb.Item href="..">{menu1?.label}</Breadcrumb.Item>
+           <Breadcrumb.Item href={menu2?.key}>{menu2?.label}</Breadcrumb.Item>
+           <Breadcrumb.Item href={menu3?.key}>{menu3?.label}</Breadcrumb.Item>
          </Breadcrumb>
          <Content
            className="site-layout-background"
@@ -165,6 +189,7 @@
        </Layout>
      </Layout>
    </Layout>
- );
+  )
+ };
  
  export default App;
