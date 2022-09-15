@@ -11,20 +11,11 @@ const cardsDefault = [
   {"id":4,"korName":"손석구","engName":"Park Eunbin","category":"배우","imageUrl":"https://www.me-u.co.kr/data/profile/thumb-profile_216_190x190.png","enneagram":"8w9","mbti":"ISFP","birthday":"1983-02-07"}
 ];
 
-const App = () => {
-  const [cards, setCards] = useState(cardsDefault);
-  useEffect(() => {
-      (async () => {
-        const response = await fetch(`/api/profile`);
-        const json = await response.json();
-        setCards(json);
-      })();
-  }, []);
-
+const App = ({ data }) => {
   return (
     <>
       <Space wrap size='middle'>
-      {cards.map((card, key) => 
+      {data.map((card, key) => 
         <Link key={key} href={`/profile/${card.id}`} passHref>
           <a>
               <Card { ...card} />
@@ -35,5 +26,13 @@ const App = () => {
     </>
   )
 };
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://darkbright.gabia.io/api/profile`)
+  const data = await res.json()
+
+  return { props: { data }};
+}
 
 export default App;
