@@ -132,7 +132,9 @@
            }}
            items={itemsSide}
            onClick={({keyPath})=>{
-            const pathname = '/' + keyPath[2] + '/' + keyPath[1] + '/' + keyPath[0] 
+            let pathname = '';
+            keyPath.reverse();
+            keyPath.map((path) => pathname += '/' + path);
             Router.push({pathname})
           }}
         />
