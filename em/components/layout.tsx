@@ -10,24 +10,24 @@
  const itemsSide = [
 
   {
-     key: "equipment",
+     key: "equipments",
      icon: React.createElement(CloudServerOutlined),
      label: '암호장비 관리',
      children: [
-       {  key: 'equipmentInfo',     
+       {  key: 'equipment',     
           label: '장비 정보',
-          children:[{key: 'equipmentInfo', label: '장비/제작정보'}]
+          children:[{key: 'info', label: '장비/제작정보'}]
         },
-       {key: 'status',        label: '상태 정보'},
-       {key: 'tracking',          label: '장비 추적'},
+       {key: 'status',      label: '상태 정보'},
+       {key: 'tracking',    label: '장비 추적'},
        {key: 'holding',     label: '보유 현황'},
-       {key: 'document', label: '수발 관리'},
-       {key: 'maintenance',label: '장비 정비 이력'},
-       {key: 'security',   label: '보안사고정보관리'},
+       {key: 'document',    label: '수발 관리'},
+       {key: 'maintenance', label: '장비 정비 이력'},
+       {key: 'security',    label: '보안사고정보관리'},
     ]
   },
    {
-    key: "document",
+    key: "security",
     icon: React.createElement(ControlOutlined),
     label: '암호자재 관리',
     children: [
@@ -82,7 +82,7 @@
     key: "organizations",
     icon: React.createElement(ApartmentOutlined),
     label: '유관기관 관리',
-    children: [{key: 'organizations', label: '유관기관 관리'},]
+    children: [{key: 'organization', label: '유관기관 관리'},]
   },  
   {
     key: "accident",
