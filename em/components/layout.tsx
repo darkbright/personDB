@@ -1,4 +1,4 @@
- import { ToolOutlined,CloudServerOutlined, UserSwitchOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
+ import {PieChartOutlined, ToolOutlined,CloudServerOutlined, UserSwitchOutlined,ControlOutlined, AuditOutlined, ApartmentOutlined,ThunderboltOutlined,SettingOutlined } from '@ant-design/icons';
  import { Breadcrumb, Layout, Menu, Typography} from 'antd';
  import React from 'react';
  import Router from 'next/router';
@@ -8,74 +8,68 @@
  const { Text } = Typography;
 
  const itemsSide = [
-  {
-    key: "user",
-    icon: React.createElement(UserSwitchOutlined),
-    label: '사용자관리',
-    children: [
-      {key: 'admin',      label: '관리자 관리'},
-      {key: 'user',       label: '사용자관리'},
-      {key: 'authority',  label: '권한관리'},
-    ]
-  },
+
   {
      key: "equipment",
      icon: React.createElement(CloudServerOutlined),
      label: '암호장비 관리',
      children: [
-       {key: 'info',        label: '장비 정보'},
-       {key: 'status',      label: '상태 정보'},
-       {key: 'tracking',    label: '장비 추적'},
-       {key: 'possession',  label: '보유 현황'},
-       {key: 'user',        label: '수발 관리'},
-       {key: 'produce',     label: '장비 정비 이력'},
-       {key: 'certificate', label: '보안사고정보관리'},
+       {key: 'equipment',     label: '장비 정보'},
+       {key: 'status',        label: '상태 정보'},
+       {key: 'tracking',          label: '장비 추적'},
+       {key: 'holding',     label: '보유 현황'},
+       {key: 'document', label: '수발 관리'},
+       {key: 'maintenance',label: '장비 정비 이력'},
+       {key: 'security',   label: '보안사고정보관리'},
     ]
   },
    {
-    key: "terminal",
+    key: "document",
     icon: React.createElement(ControlOutlined),
     label: '암호자재 관리',
     children: [
-      {key: 'info',         label: '증명서 관리'},
-      {key: 'distribution', label: '관리 기록부'},
+      {key: 'certificate',    label: '증명서 관리'},
+      {key: 'administration', label: '관리 기록부'},
+      {key: 'inspection',     label: '점검 기록부'},
     ]
   },
   {
-    key: "qrcode",
+    key: "permit",
     icon: React.createElement(AuditOutlined),
     label: '승인 관리',
     children: [
-      {key: 'info',     label: '사용 승인'},
-      {key: 'approval', label: '제작 승인'},
-      {key: 'approval', label: '파기 승인'},
+      {key: 'approval',     label: '사용 승인'},
+      {key: 'manufacture',  label: '제작 승인'},
+      {key: 'disposal',     label: '파기 승인'},
     ]
   },
   {
-    key: "vendor",
+    key: "development",
     icon: React.createElement(ThunderboltOutlined),
     label: '개발 관리',
     children: [
-      {key: 'appoint',  label: '개발 과제'},
-      {key: 'status',   label: '이슈 관리'},
-      {key: 'analysis', label: '시험정보 관리'},
-      {key: 'security', label: '평가정보 관리'},
+      {key: 'development',  label: '개발 과제'},
+      {key: 'issues',       label: '이슈 관리'},
+      {key: 'test',         label: '시험정보 관리'},
+      {key: 'rating',       label: '평가정보 관리'},
+      {key: 'verify',       label: '안정성 검증 관리'},
+      {key: 'charge',  label: '개발담당 관리'},
     ]
   },
   {
-    key: "develop",
+    key: "production",
     icon: React.createElement(ToolOutlined),
     label: '제작업체 관리',
     children: [
-      {key: 'need',         label: '제작업체 관리'},
+      {key: 'production',   label: '제작업체 관리'},
     ]
   },  
   {
-    key: "organiztion",
+    key: "organizations",
     icon: React.createElement(ApartmentOutlined),
     label: '유관기관 관리',
     children: [
-      {key: 'status',   label: '유관기관 관리'},
+      {key: 'organizations', label: '유관기관 관리'},
 
     ]
   },  
@@ -84,9 +78,9 @@
     icon: React.createElement(SettingOutlined),
     label: '시스템 관리',
     children: [
-      {key: 'info', label: '사용자 관리'},
-      {key: 'info', label: '단말기 관리'},
-      {key: 'info', label: '데이터 관리'},
+      {key: 'system',   label: '사용자 관리'},
+      {key: 'terminal', label: '단말기 관리'},
+      {key: 'data',     label: '데이터 관리'},
     ]
   },
  ]
