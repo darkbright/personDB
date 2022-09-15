@@ -72,7 +72,7 @@
     ]
   },
   {
-    key: "production",
+    key: "productions",
     icon: React.createElement(ToolOutlined),
     label: '제작업체 관리',
     children: [{key: 'production',   label: '제작업체 관리'},]
