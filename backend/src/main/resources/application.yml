@@ -4,6 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: darkbright
     password: ofzhf@@726
+    max-lifetime: 28000
   jpa:
     show-sql: true
     hibernate:
